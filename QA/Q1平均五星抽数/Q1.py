@@ -22,29 +22,28 @@ if __name__ == '__main__':
             datebase_temp.append(rolls_temp)
         datebase.append(datebase_temp)
 
-    skips_number = 0
+    skips_number = 3
     skips_weapon = 0
+
     rolls_for_five = []
     for user in datebase:
-        rolls_for_five.append(0)
+        rolls_count = 0
         skips_count = 0
-        empty_excess=0
+
         for roll in user[2]:
+            rolls_count += 1
+            # 当抽到五星
             if(roll[3] == '5'):
+                skips_count += 1
+                # 判断跳过前*抽
                 if(skips_number):
-                    skips_count += 1
-                    if(skips_count <= skips_number):
-                        rolls_for_five[-1] = 0
-                    else:
-                        rolls_for_five.append(0)
+                    if(skips_count > skips_number):
+                        rolls_for_five.append(rolls_count)
+                        #print(rolls_count,end=" ")
                 else:
-                    rolls_for_five.append(0)
-                    empty_excess=0
-            rolls_for_five[-1] += 1
-            empty_excess=1
-        if(empty_excess):
-            del rolls_for_five[-1]
-    rolls_count = 0
+                    rolls_for_five.append(rolls_count)
+                # 计数清零
+                rolls_count = 0
 
     for nu in rolls_for_five:
         rolls_count += nu
