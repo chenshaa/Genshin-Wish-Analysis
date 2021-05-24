@@ -21,36 +21,35 @@ if __name__ == '__main__':
                     rolls_temp.append(i)
             datebase_temp.append(rolls_temp)
         datebase.append(datebase_temp)
-    
-    hero_list={}
-    switch_five=1
-    switch_four=1
+
+    hero_list = {}
+    switch_five = 1
+    switch_four = 1
     for user in datebase:
         for roll in user[2]:
-            if(roll[3]=='5' and switch_five):
+            if(roll[3] == '5' and switch_five):
                 if(roll[1] in hero_list):
-                    hero_list[roll[1]]+=1
+                    hero_list[roll[1]] += 1
                 else:
-                    hero_list[roll[1]]=1
-            if(roll[3]=='4' and switch_four):
+                    hero_list[roll[1]] = 1
+            if(roll[3] == '4' and switch_four):
                 if(roll[1] in hero_list):
-                    hero_list[roll[1]]+=1
+                    hero_list[roll[1]] += 1
                 else:
-                    hero_list[roll[1]]=1
+                    hero_list[roll[1]] = 1
     print(hero_list.items())
 
     from pyecharts import options as opts
     from pyecharts.charts import WordCloud
-    
+
     (
         WordCloud()
         .add(series_name="角色词云", data_pair=hero_list.items())
         .set_global_opts(
             title_opts=opts.TitleOpts(
-            title="五星角色词云", title_textstyle_opts=opts.TextStyleOpts(font_size=23)
-        ),
-        tooltip_opts=opts.TooltipOpts(is_show=True),
+                title="五星角色词云", title_textstyle_opts=opts.TextStyleOpts(font_size=23)
+            ),
+            tooltip_opts=opts.TooltipOpts(is_show=True),
+        )
+        .render("Q2五星角色词云.html")
     )
-    .render("Q2五星角色词云.html")
-)
-

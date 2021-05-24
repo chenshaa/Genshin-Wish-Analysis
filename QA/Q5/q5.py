@@ -5,6 +5,10 @@ import csv
 import time
 from itertools import islice
 
+'''
+Todo
+天数判断
+'''
 
 if __name__ == '__main__':
     datebase = []
@@ -72,13 +76,14 @@ if __name__ == '__main__':
 
     print(date_list)
 
-#绘制表格
+
+# 绘制表格
+
 def sort_(date):
     ret = []
     for i in sorted(date.items(), key=lambda x: x[0], reverse=False):
         ret.append(i[1])
     return ret
-
 
 def get_x(date: dict):
     max_len = 0
@@ -92,9 +97,6 @@ def get_x(date: dict):
         list.append('第'+str(i+1)+'天')
     return list
 
-
-x_data = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-
 line = Line()
 line.add_xaxis(xaxis_data=get_x(date_list))
 for key in date_list.keys():
@@ -105,5 +107,5 @@ for key in date_list.keys():
         label_opts=opts.LabelOpts(is_show=False),
     )
 
-line.set_global_opts(title_opts=opts.TitleOpts(title="Line-面积图"))
+line.set_global_opts(title_opts=opts.TitleOpts(title="抽卡数量表"))
 line.render("Q5抽卡习惯表.html")
